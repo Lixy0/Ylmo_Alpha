@@ -158,7 +158,6 @@ class scene extends Phaser.Scene {
         this.pointCamera = this.physics.add.sprite(600,1000);
         this.pointCamera.body.setAllowGravity(false);
         this.pointCamera.setImmovable(true);
-        this.pointCamera.setVelocityX(300);
         this.cameras.main.startFollow(this.player.player,true,1,1,0,150);
 
 

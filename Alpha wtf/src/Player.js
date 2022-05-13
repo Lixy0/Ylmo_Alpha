@@ -11,7 +11,7 @@ class Player {
         this.ghost = this.scene.add.particles('ghost');
         this.ghostRight = this.scene.add.particles('ghost');
         this.ghostLeft = this.scene.add.particles('ghost');
-        this.player = this.scene.physics.add.sprite(8250, 900, 'player');
+        this.player = this.scene.physics.add.sprite(1250, 1100, 'player');
         this.player.setScale(1);
         this.player.setCollideWorldBounds(false);
         this.player.body.setMaxSpeed(1200);
