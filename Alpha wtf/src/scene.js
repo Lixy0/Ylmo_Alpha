@@ -76,20 +76,23 @@ class scene extends Phaser.Scene {
         //PLAYER
         this.player = new Player(this);
 
+        // SAVE
+        this.save = new Save(this, this.player);
+
         //DRAGON
-        this.dragon = new Dragon(this);
+        this.dragon = new Dragon(this, this.player, this.save, this.cameras);
 
         // BONUS FLAME
         new BonusFlame(this, this.player);
-
-        // SAVE
-        this.save = new Save(this, this.player);
 
         //Portes
         this.portes = new Portes(this, this.player);
 
         //ENNEMY
         this.ennemy = new Ennemies(this, this.player, this.save);
+
+        //BOXOVERLAP
+        this.box = new BoxOverlap(this, this.player, this.cameras, this.dragon);
 
         this.Plan2Fixe = map.createLayer('Plan2Fixe', tileset);
         this.Plan2Fixe.setPipeline('Light2D');
@@ -157,7 +160,6 @@ class scene extends Phaser.Scene {
         this.pointCamera.setImmovable(true);
         this.pointCamera.setVelocityX(300);
         this.cameras.main.startFollow(this.player.player,true,1,1,0,150);
-        //this.cameras.main.startFollow(this.pointCamera,false);
 
 
         // COLLIDER
@@ -174,6 +176,7 @@ class scene extends Phaser.Scene {
 
     }
 
+
     update()
     {
         if (this.player.Pdown){
@@ -186,12 +189,9 @@ class scene extends Phaser.Scene {
                 this.Pauseflag = true;
             }
         }
-        switch(window.change) {
-            case window.keyboard_AZERTY:
+        if (window.change) {
                 this.player.initKeyboard();
                 window.change=false;
-                break;
-
         }
 
 
@@ -201,16 +201,12 @@ class scene extends Phaser.Scene {
         this.player.move();
         this.ennemy.IaGesttion();
 
-       this.dragon.dragon.body.x = this.player.player.body.x - 800;
+        if (window.dragonEnable){
+            this.dragon.dragon.body.x = this.pointCamera.body.x - 800;
+        }
 
         this.light.x = this.player.player.body.x +15;
         this.light.y = this.player.player.body.y + 15;
 
-        //this.degrade.x = this.pointCamera.body.x +10;
-        //this.degrade.y = this.pointCamera.body.y + 300;
-
-        /*if (this.player.player.body.x <= this.pointCamera.body.x - 400){
-            alert ('perdu');
-        }*/
     }
 }

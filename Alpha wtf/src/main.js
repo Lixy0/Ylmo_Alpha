@@ -11,7 +11,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 1000 },
-            debug: false,
+            debug: true,
         },
     },
     scene: [new Initialize(), new Start(),new scene(), new Pause(), new option()]
